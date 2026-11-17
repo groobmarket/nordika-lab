@@ -416,12 +416,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modalOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
   }
 
   function closeFlavorModal() {
     if (!modalOverlay) return;
     modalOverlay.classList.remove('open');
     document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
   }
 
   document.querySelectorAll('.btn-quick-preview').forEach(btn => {

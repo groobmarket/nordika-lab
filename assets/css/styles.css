@@ -1710,6 +1710,15 @@ button {
   margin-bottom: 24px;
 }
 
+/* Ocultar elementos flotantes cuando el modal está abierto para evitar solapamientos */
+body.modal-open .floating-whatsapp-widget,
+body.modal-open .mobile-bottom-quickbar {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  transition: opacity 0.25s ease, visibility 0.25s;
+}
+
 /* --------------------------------------------------------------------------
    14. MEDIA QUERIES (RESPONSIVE FIRST-CLASS)
    -------------------------------------------------------------------------- */
@@ -1785,38 +1794,302 @@ button {
 }
 
 @media (max-width: 640px) {
+  body {
+    padding-bottom: 74px;
+  }
+
   .flavors-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
+
   .about-pillars {
     grid-template-columns: 1fr;
   }
+
   .footer-top-grid {
     grid-template-columns: 1fr;
   }
+
   .floating-tooltip {
     display: none;
   }
+
   .floating-whatsapp-widget {
-    bottom: 85px;
-    right: 20px;
+    bottom: 82px;
+    right: 16px;
+    transform: scale(0.92);
+    transform-origin: bottom right;
   }
+
   .mobile-bottom-quickbar {
     display: block;
+    z-index: 998;
   }
-  .modal-body-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .modal-cup-img {
-    max-width: 180px;
-    margin: 0 auto;
-  }
+
   .btn {
     width: 100%;
+    white-space: normal;
+    text-align: center;
   }
+
   .hero-ctas {
     flex-direction: column;
     width: 100%;
+  }
+
+  /* =========================================================================
+     PERFECCIÓN RESPONSIVE: SECCIÓN EXPERIENCIA VISUAL (MÓVIL)
+     ========================================================================= */
+  .section-experience {
+    padding: 60px 0 80px 0;
+  }
+
+  .experience-lab-box {
+    padding: 22px 14px;
+    border-radius: 20px;
+    background: radial-gradient(ellipse at 50% 20%, rgba(14, 58, 90, 0.6) 0%, rgba(4, 11, 20, 0.98) 100%);
+  }
+
+  .experience-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .cup-display-stage {
+    min-height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+    position: relative;
+  }
+
+  .stage-glow-disc {
+    width: 210px;
+    height: 210px;
+    filter: blur(30px);
+  }
+
+  .cup-main-frame {
+    width: 210px;
+    height: 260px;
+    max-width: 80vw;
+    border-radius: 18px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 229, 255, 0.35);
+  }
+
+  .frost-condensate-tag {
+    position: static;
+    transform: none;
+    margin-top: 12px;
+    font-size: 0.72rem;
+    padding: 5px 14px;
+    background: rgba(3, 8, 16, 0.95);
+    border: 1px solid var(--color-cyan-neon);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+  }
+
+  .experience-details {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Pestañas de Sabores en Móvil (Grilla 3x2 Limpia y Compacta) */
+  .experience-selector-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .exp-tab-btn {
+    padding: 8px 4px;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: var(--border-radius-pill);
+  }
+
+  .exp-flavor-name {
+    font-size: 1.65rem;
+    line-height: 1.15;
+    margin-bottom: 4px;
+    word-break: break-word;
+  }
+
+  .exp-flavor-base {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .exp-flavor-quote {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    padding: 0 4px;
+  }
+
+  /* Métricas Sensoriales en 1 Columna con Espacio Completo */
+  .sensory-metrics {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .metric-bar-wrap {
+    padding: 10px 14px;
+    background: rgba(10, 29, 46, 0.7);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: var(--border-radius-sm);
+  }
+
+  .metric-label-row {
+    font-size: 0.76rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .exp-cta-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .exp-cta-row a,
+  #stage-order-btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+    font-size: 0.86rem;
+    padding: 14px 18px;
+    line-height: 1.3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-sizing: border-box;
+  }
+
+  /* =========================================================================
+     PERFECCIÓN RESPONSIVE: MODAL DE PERFIL SENSORIAL (MÓVIL)
+     ========================================================================= */
+  .flavor-modal-overlay {
+    padding: 14px;
+    z-index: 9999;
+    align-items: center;
+  }
+
+  .flavor-modal-dialog {
+    padding: 24px 16px 20px 16px;
+    max-width: 380px;
+    width: 100%;
+    border-radius: 20px;
+    max-height: 86vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 229, 255, 0.4);
+  }
+
+  .modal-close-btn {
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .modal-body-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .modal-cup-img {
+    width: 140px;
+    height: 175px;
+    max-width: 60%;
+    object-fit: cover;
+    border-radius: 14px;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+  }
+
+  .modal-content-col {
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-content-col h3 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 4px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+  }
+
+  .modal-content-col .modal-sub {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    color: var(--color-cyan-neon);
+    letter-spacing: 0.1em;
+  }
+
+  .modal-content-col p {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-bottom: 10px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+    color: var(--color-ice-blue);
+  }
+
+  #modal-flavor-notes {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    margin-bottom: 18px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+    color: var(--color-text-muted);
+  }
+
+  #modal-order-btn {
+    width: 100%;
+    white-space: normal;
+    line-height: 1.3;
+    padding: 13px 16px;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
   }
 }
